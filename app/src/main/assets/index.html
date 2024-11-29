@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sonni Matnga Almashtirish</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    padding: 20px;
+}
+
+.container {
+    max-width: 500px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 30px rgba(0, 0, 0  , 55);
+}
+
+
+h1,
+h2 {
+    text-align: center;
+}
+
+h4 {
+    text-align: center;
+    color: #007BFF;
+}
+
+label,
+input,
+select,
+button {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+#number{
+    width: 95%;
+}   
+#result{
+    color:Prabheld go live Go commando go Cause this was to the court Visual Studio code visual studio code close visual studio code contask manager ;
+
+}
+
+input,
+select,
+button {
+    align-content: center;
+    padding: 10px;
+    font-size: 16px;
+}
+
+button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px; 
+}
+
+button:hover {
+    background-color: #fff;
+    color: #007BFF;
+    border: #007BFF 2px solid;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sonni matnga almashtirish</h1>
+
+        <label for="number">Sonni kiriting:</label>
+        <input type="number" id="number" placeholder="12345" onkeyup="handleKeyUp(event)">
+
+        <label for="language">Tilni tanlang:</label>
+        <select id="language">
+            <option value="uz">O'zbekcha</option>
+            <option value="oz">Ўзбекча</option>
+            <option value="ru">Ruscha</option>
+            <option value="en">Inglizcha</option>
+        </select>
+
+        <label for="case">Harflar ko'rinishini tanlang:</label>
+        <select id="case">
+            <option value="default">Oddiy</option>
+            <option value="uppercase">Katta harflar</option>
+            <option value="lowercase">Kichik harflar</option>
+        </select>
+
+        <button onclick="convertNumber()">Matnga almashtirish</button>
+
+        <h2>Natija:</h2>
+        <p id="result"></p>
+        <button onclick="copyToClipboard()">Natijani nusxalash</button>
+        
+    </div>
+    <script >function handleKeyUp(event) {
+    if (event.key === 'Enter') {
+        convertNumber();
+    }
+}
+function convertNumber() {
+    const integerPart = document.getElementById('number').value;
+    const language = document.getElementById('language').value;
+    const caseStyle = document.getElementById('case').value;
+      // Sonni nuqtaga qarab bo'lib ajratamiz
+    const parts = integerPart.split('.');
+    
+    // Nuqtadan oldingi qismni olish
+    const number = parts[0];
+  
+
+    let resultText = '';
+
+    switch (language) {
+        case 'uz':
+            resultText = convertToUzbek(number);
+            break;
+       case 'oz':
+            resultText = convertToOzbek(number);
+            break;
+        case 'ru':
+            resultText = convertToRussian(number);
+            break;
+        case 'en':
+            resultText = convertToEnglish(number);
+            break;
+    }
+
+    if (caseStyle === 'uppercase') {
+        resultText = resultText.toUpperCase();
+    } else if (caseStyle === 'lowercase') {
+        resultText = resultText.toLowerCase();
+    }
+
+    document.getElementById('result').innerText = resultText;
+}
+
+function convertToUzbek(number) {
+    const units = ['', 'bir', 'ikki', 'uch', 'to\'rt', 'besh', 'olti', 'yetti', 'sakkiz', 'to\'qqiz'];
+    const teens = ['o\'n', 'o\'n bir', 'o\'n ikki', 'o\'n uch', 'o\'n to\'rt', 'o\'n besh', 'o\'n olti', 'o\'n yetti', 'o\'n sakkiz', 'o\'n to\'qqiz'];
+    const tens = ['', '', 'yigirma', 'o\'ttiz', 'qirq', 'ellik', 'oltmish', 'yetmish', 'sakson', 'to\'qson'];
+    const hundreds = ['', 'yuz', 'ikki yuz', 'uch yuz', 'to\'rt yuz', 'besh yuz', 'olti yuz', 'yetti yuz', 'sakkiz yuz', 'to\'qqiz yuz'];
+    const thousands = ['ming', 'million', 'milliard','trillion', 'kvadrillion', 'kvantillion ' ];
+
+    return convertToWords(number, units, teens, tens, hundreds, thousands);
+}
+
+function convertToOzbek(number) {
+    const units = ['', 'бир', 'икки', 'уч', 'тўрт', 'беш', 'олти', 'етти', 'саккиз', 'тўққиз'];
+    const teens = ['ўн', 'ўн бир', 'ўн икки', 'ўн уч', 'ўн тўрт', 'ўн беш', 'ўн олти', 'ўн етти', 'ўн саккиз', 'ўн тўққиз'];
+    const tens = ['', '', 'йигирма', 'ўттиз', 'қирқ', 'эллик', 'олтмиш', 'етмиш', 'саксон', 'тўқсон'];
+    const hundreds = ['', 'юз', 'икки юз', 'уч юз', 'тўрт юз', 'беш юз', 'олти юз', 'етти юз', 'саккиз юз', 'тўққиз юз'];
+    const thousands = ['минг', 'миллион', 'миллиард', 'триллион','квадриллион ','квинтиллион '];
+
+    return convertToWords(number, units, teens, tens, hundreds, thousands);
+}
+function convertToRussian(number) {
+    const units = ['', 'один', 'два', 'три', 'четыре', 'пять', 'шесть', 'семь', 'восемь', 'девять'];
+    const teens = ['десять', 'одиннадцать', 'двенадцать', 'тринадцать', 'четырнадцать', 'пятнадцать', 'шестнадцать', 'семнадцать', 'восемнадцать', 'девятнадцать'];
+    const tens = ['', '', 'двадцать', 'тридцать', 'сорок', 'пятьдесят', 'шестьдесят', 'семьдесят', 'восемьдесят', 'девяносто'];
+    const hundreds = ['', 'сто', 'двести', 'триста', 'четыреста', 'пятьсот', 'шестьсот', 'семьсот', 'восемьсот', 'девятьсот'];
+    const thousands = ['тысяча', 'миллион', 'миллиард','триллион','квадриллион ','квинтиллион '];
+
+    return convertToWords(number, units, teens, tens, hundreds, thousands);
+}
+
+function convertToEnglish(number) {
+    const units = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+    const teens = ['ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
+    const tens = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
+    const hundreds = ['', 'one hundred', 'two hundred', 'three hundred', 'four hundred', 'five hundred', 'six hundred', 'seven hundred', 'eight hundred', 'nine hundred'];
+    const thousands = ['thousand', 'million', 'billion', 'trillion ', 'quadrillion', 'quintillion '];
+
+    return convertToWords(number, units, teens, tens, hundreds, thousands);
+}
+
+function convertToWords(number, units, teens, tens, hundreds, thousands) {
+    if (number === '0') return 'nol';
+
+    let numStr = number.toString();
+    let words = '';
+
+    let i = 0;
+    while (numStr.length > 0) {
+        let n = parseInt(numStr.slice(-3));
+        if (n !== 0) {
+            let str = '';
+            if (n % 100 < 20 && n % 100 > 9) {
+                str = teens[n % 10] + ' ' + str;
+            } else {
+                str = units[n % 10] + ' ' + str;
+                str = tens[Math.floor(n / 10) % 10] + ' ' + str;
+            }
+            str = hundreds[Math.floor(n / 100)] + ' ' + str;
+            words = str + (i > 0 ? ' ' + thousands[i - 1] : '') + ' ' + words;
+        }
+        numStr = numStr.slice(0, -3);
+        i++;
+    }
+
+    return words.trim();
+}
+
+function copyToClipboard() {
+    const resultText = document.getElementById('result').innerText;
+    if (resultText) {
+        navigator.clipboard.writeText(resultText).then(() => {
+            alert("Natija nusxalandi!");
+        }).catch(err => {
+            console.error("Nusxa olishda xatolik yuz berdi:", err);
+        });
+    }
+}
+
+
+function countDecimalPlaces(number) {
+    const parts = number.split('.');
+    if (parts.length === 2) {
+        const decimalPart = parts[1];
+        const count = decimalPart.length;
+        
+        if (count === 1) {
+            return "10";
+        } else {
+            return `Nuqtadan keyingi sonlar soni: ${count}`;
+        }
+    } else {
+        return "Bu son float emas yoki unda nuqta yo'q.";
+    }
+}
+</script>
+</body>
+</html>
